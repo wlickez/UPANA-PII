@@ -9,8 +9,7 @@ namespace ManejoControles
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            AgregarButton.Click += AgregarButton_Click2;
-            AgregarButton.Click += OtroMetodoChafa;
+           
         }
 
 
@@ -61,6 +60,33 @@ namespace ManejoControles
                 }
             }
 
+        }
+
+        private async void AgregarButton_Click_1(object sender, EventArgs e)
+        {
+            int final = 100;
+
+            timer1.Start();
+            timer1.Interval = 5000;
+            timer1.Tick += Timer1_Tick;
+
+            AgregarButton.Enabled = false;
+
+            for (int i = 0; i <= final; i++)
+            {
+                progressBar1.Value = i;
+                progressBar1.Refresh();
+                await Task.Delay(500);
+            }
+
+            AgregarButton.Enabled = true;            
+
+            timer1.Stop();
+        }
+
+        private void Timer1_Tick(object? sender, EventArgs e)
+        {
+            ListadoAlumnosListBox.Items.Add("Agregado por el control Timer: " + DateTime.Now.ToString());            
         }
     }
 }
